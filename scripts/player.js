@@ -70,19 +70,19 @@ export class Player {
         let directionY = 0;
         
         if(this.movement.up) {
-            directionY = -1;
+            directionY = -10;
         };
         if(this.movement.down) {
-            directionY = 1;
+            directionY = 10;
         };
-        if(this.movement.down && this.movement.down) {
+        if(this.movement.up && this.movement.down) {
             directionY = 0;
         };
         if(this.movement.right) {
-            directionX = 1;
+            directionX = 10;
         };
         if(this.movement.left) {
-            directionX = -1;
+            directionX = -10;
         };
         if(this.movement.right && this.movement.left) {
             directionX = 0;
