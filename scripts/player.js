@@ -8,7 +8,7 @@ export class Player {
         this.width = 75;
         this.height = 25;
 
-        this.speed = 1;
+        this.speed = 5;
 
         this.keyBindings = {
             up: "ArrowUp",
@@ -70,19 +70,19 @@ export class Player {
         let directionY = 0;
         
         if(this.movement.up) {
-            directionY = -10;
+            directionY = -1;
         };
         if(this.movement.down) {
-            directionY = 10;
+            directionY = 1;
         };
         if(this.movement.up && this.movement.down) {
             directionY = 0;
         };
         if(this.movement.right) {
-            directionX = 10;
+            directionX = 1;
         };
         if(this.movement.left) {
-            directionX = -10;
+            directionX = -1;
         };
         if(this.movement.right && this.movement.left) {
             directionX = 0;
@@ -90,6 +90,19 @@ export class Player {
 
         this.x += this.speed * directionX;
         this.y += this.speed * directionY;
+
+        if(this.x < 0) {
+            this.x = 0;
+        };
+        if(this.y < 0) {
+            this.y = 0;
+        };
+        if(this.x + this.width > canvas.width) {
+            this.x = canvas.width - this.width;
+        };
+        if(this.y + this.height > canvas.height) {
+            this.y = canvas.height - this.height;
+        };
     };
 
     draw() {
