@@ -1,8 +1,11 @@
 //@ts-check
 import { canvas, ctx } from "./common/canvas.js";
 import { Player } from "./player.js";
+import { GoodCollectable } from "./collectables/collectable-good.js";
 
 let player = new Player();
+
+let item1 = new GoodCollectable(canvas.width /2, canvas.height /2);
 
 let lastTimestamp = 0
 
@@ -14,6 +17,9 @@ function gameLoop(timestamp) {
 
     player.update();
     player.draw();
+
+    item1.update();
+    item1.draw();
 
     window.requestAnimationFrame(gameLoop);
 };
