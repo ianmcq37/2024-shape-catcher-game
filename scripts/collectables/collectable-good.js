@@ -34,22 +34,22 @@ export class GoodCollectable extends CollectableItem {
 		this.lifetime += elapsedTime;
 
 		if (this.lifetime < this.spawnInTime) {
-			// we have not fully spawned in yet
+			//we have not fully spawned in yet
 			this.alpha = Math.floor((this.lifetime / this.spawnInTime) * 100);
 		}
 
 		if (this.lifetime > this.despawnTime - this.despawnWarningTime) {
-			// start blinking
+			//start blinking
 			//console.log("should blink now");
 
 			this.blink.lastBlink += elapsedTime;
 			if (this.blink.lastBlink > this.blink.interval) {
 				if (this.blink.isVisible) {
-					console.log("blink off");
+					//console.log("blink off");
 
 					this.alpha = 0;
 				} else {
-					console.log("blink on");
+					//console.log("blink on");
 					this.alpha = 100;
 				}
 				this.blink.lastBlink = 0;

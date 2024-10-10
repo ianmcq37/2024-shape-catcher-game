@@ -1,5 +1,6 @@
 //@ts-check
 import { ctx } from "../common/canvas.js"
+
 export class CollectableItem {
     constructor(x = 0, y = 0) {
         this.x = x;

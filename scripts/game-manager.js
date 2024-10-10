@@ -1,12 +1,13 @@
 //@ts-check
 
+import { CollectableItem } from "./collectables/collectable-base.js";
 import { GoodCollectable } from "./collectables/collectable-good.js";
 import { canvas } from "./common/canvas.js";
 import { Player } from "./player.js";
 
 export class GameManager {
     constructor() {
-        this.players = [];
+        this.player = [];
         this.collectables = [];
         this.enemies = [];
 
@@ -17,7 +18,7 @@ export class GameManager {
             nextSpawn: 0,
             next: function() {
                 this.lastSpawn = 0;
-                this.nextSpawn = random(5 * 1000, 7 * 1000);
+                this.nextSpawn = random(5 * 1000, 10 * 1000);
             }
         }
 
@@ -25,17 +26,17 @@ export class GameManager {
     }
 
     initialize() {
-        this.players = [];
+        this.player = [];
         let p1 = new Player(canvas.width / 2, canvas.height / 2);
         p1.x -= p1.width / 2;
         p1.y -= p1.height / 2;
         
-        this.players.push(p1);
+        this.player.push(p1);
     }
 
     update(elapsedTime) {
         this.spawner(elapsedTime);
-        this.players.forEach(p => {
+        this.player.forEach(p => {
             p.update();
         })
 
@@ -60,7 +61,7 @@ export class GameManager {
     }
 
     draw() {
-        this.players.forEach(p => {
+        this.player.forEach(p => {
             p.draw();
         })
     
