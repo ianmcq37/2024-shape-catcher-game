@@ -9,7 +9,7 @@ export class GoodCollectable extends CollectableItem {
 		this.height = 25;
 
 		this.despawnTime = 10 * 1000;
-		this.spawnInTime = 5 * 1000;
+		this.spawnInTime = 3 * 1000;
 		this.despawnWarningTime = 3 * 1000;
 
 		this.blink = {

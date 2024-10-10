@@ -8,7 +8,7 @@ export class Player {
         this.width = 75;
         this.height = 25;
 
-        this.speed = 5;
+        this.speed = 10;
 
         this.keyBindings = {
             up: "ArrowUp",

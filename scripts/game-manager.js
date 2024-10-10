@@ -1,5 +1,6 @@
 //@ts-check
 
+import { GoodCollectable } from "./collectables/collectable-good.js";
 import { canvas } from "./common/canvas.js";
 import { Player } from "./player.js";
 
@@ -13,11 +14,14 @@ export class GameManager {
 
         this.goodSpawn = {
             lastSpawn: 0,
-            nextSpawn: Math.min(random(15), 5),
-            getNewNext: function() {
-                this.nextSpawn = Math.min(random(15), 5);
+            nextSpawn: 0,
+            next: function() {
+                this.lastSpawn = 0;
+                this.nextSpawn = random(5 * 1000, 7 * 1000);
             }
         }
+
+        this.spawner(0);
     }
 
     initialize() {
@@ -30,6 +34,7 @@ export class GameManager {
     }
 
     update(elapsedTime) {
+        this.spawner(elapsedTime);
         this.players.forEach(p => {
             p.update();
         })
@@ -37,6 +42,21 @@ export class GameManager {
         this.collectables.forEach(c => {
             c.update(elapsedTime);
         })
+    }
+
+    spawner(elapsedTime) {
+        this.goodSpawn.lastSpawn += elapsedTime;
+
+        if(this.goodSpawn.lastSpawn > this.goodSpawn.nextSpawn) {
+            //spawn a good collectable
+            const buffer = 50;
+            const sx = random(buffer, canvas.width - buffer);
+            const sy = random(buffer, canvas.height - buffer);
+            const item = new GoodCollectable(sx, sy);
+            this.collectables.push(item);
+            //reset the spawn timer and get a new spawn time
+            this.goodSpawn.next();
+        }
     }
 
     draw() {
@@ -50,7 +70,8 @@ export class GameManager {
     }
 }
 
-function random(max = 100) {
-    let r = Math.floor(Math.random() * max);
+function random(min, max) {
+    let upper = max - min
+    let r = Math.floor(Math.random() * upper);
     return r;
 }
